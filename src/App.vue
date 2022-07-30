@@ -1,15 +1,17 @@
 <template>
   <div>
+      <!-- <router-link to="/clock">Go to clock</router-link> -->
+  </div>
+  <router-view>
     <div id="wa">
       <h1 id = "b">我的表</h1>
       <AnalogClock :size="80" unit="vmin"></AnalogClock>
     </div>
-  </div>
+  </router-view>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import AnalogClock from './components/clock/AnalogClock.vue'
+import AnalogClock from '@/components/clock/AnalogClock.vue'
 export default {
   name: 'App',
   components: {
