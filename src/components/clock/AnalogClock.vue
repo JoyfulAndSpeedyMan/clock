@@ -280,8 +280,17 @@ export default {
 }
 
 .minute-line-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+
+  -webkit-box-pack: right;
+  -ms-flex-pack: right;
   justify-content: right;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   /* background-color: rgb(186, 189, 39); */
   height: 100%;
@@ -290,10 +299,17 @@ export default {
 }
 
 .minute-line-box .clock-scale-text {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+
+  box-direction: column;
   flex-direction: column;
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
-  font-size: 2em;
   margin-right: 3%;
 }
 
