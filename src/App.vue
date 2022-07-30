@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div id="wa">
+      <h1 id = "b">我的表</h1>
+      <AnalogClock :size="80" unit="vmin"></AnalogClock>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import HelloWorld from './components/HelloWorld.vue'
+import AnalogClock from './components/clock/AnalogClock.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AnalogClock
+  },
+  method: {
+
+  },
+  computed: {
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#wa {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#b {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-size: 3em;
 }
 </style>

@@ -1,0 +1,141 @@
+/* To view a minified version using SCSS visit: https://codepen.io/alvaromontoro/pen/jGYQoP */
+
+@keyframes rotateArms {
+  from {
+    transform: rotate(0) translate(-50%, 0);
+  }
+
+  to {
+    transform: rotate(360deg) translate(-50%, 0);
+  }
+}
+
+@-webkit-keyframes rotateArms {
+  from {
+    transform: rotate(0) translate(-50%, 0);
+
+  }
+
+  to {
+    transform: rotate(360deg) translate(-50%, 0);
+  }
+}
+
+@-moz-keyframes rotateArms {
+  from {
+    transform: rotate(0) translate(-50%, 0);
+  }
+
+  to {
+    transform: rotate(360deg) translate(-50%, 0);
+  }
+}
+
+.clock {
+  width: 200px;
+  height: 200px;
+  box-shadow: 0px 0px 0px 10px #222;
+  border-radius: 200px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.knob {
+  width: 13.33333px;
+  height: 13.33333px;
+  background: #111;
+  border-radius: 13.33333px;
+  z-index: 4;
+}
+
+.arm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top left 0;
+  z-index: 2;
+  width: 0;
+  animation: rotateArms linear 60s infinite;
+  -webkit-animation: rotateArms linear 60s infinite;
+  -moz-animation: rotateArms linear 60s infinite;
+}
+
+.minute.arm {
+  background-color: #444;
+  box-shadow: 0 0 0 2px #444;
+  animation-duration: 3600s;
+  -webkit-animation-duration: 3600s;
+  -moz-animation-duration: 3600s;
+}
+
+.hour.arm {
+  background-color: #444;
+  box-shadow: 0 0 0 3.33333px #444;
+  animation-duration: 43200s;
+  -webkit-animation-duration: 43200s;
+  -moz-animation-duration: 43200s;
+}
+
+.second.arm {
+  /* width: 10px; */
+  box-shadow: 0 0 0 1.33333px #a00;
+  background-color: #a00;
+}
+
+.box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.minute-lines {
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.minute-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(0%, -50%) rotate(30); */
+  transform-origin: 0 50% 0;
+  /* background-color: rgb(186, 189, 39); */
+  width: 50%;
+  height: 10%;
+  /* z-index: -1; */
+
+}
+
+.minute-line-box{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  /* background-color: rgb(186, 189, 39); */
+  height: 100%;
+  padding-right: 2%;
+
+}
+
+.minute-line-box .clock-scale-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2em;
+  margin-right: 3%;
+}
+.minute-line-box .clock-scale{
+  height: 20%;
+  width: 50px;
+  background-color: #000
+}
