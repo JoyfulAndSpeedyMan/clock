@@ -13,16 +13,15 @@
       </div>
 
       <div class="minute-lines">
-        <div v-for="i in 60" :key="i" :a="i" class="minute-line"
-          :style="`transform: translate(0%, -50%) rotate(${calibDeg(i)}deg)`">
+        <div v-for="i in 60" :key="i" :a="i" class="minute-line" :style="minuteLineStyle(i)">
+          <div class="minute-line-outer-box">
+            <div class="minute-line-box">
+              <div class="clock-scale" :style="scaleStyle(i)"></div>
 
-          <div class="minute-line-box">
-
-            <div class="clock-scale-text" :style="clockScaleTextStyle(i)" v-if="showCalibDigit(i)">
-              {{ i != 1 ? (i - 1) / 5 : 12 }}
+              <div class="clock-scale-text" :style="clockScaleTextStyle(i)" v-if="showCalibDigit(i)">
+                {{ i != 1 ? (i - 1) / 5 : 12 }}
+              </div>
             </div>
-
-            <div class="clock-scale" :style="scaleStyle(i)"></div>
           </div>
         </div>
       </div>
@@ -78,14 +77,31 @@ export default {
       return (i - 1) % 5 == 0;
     },
     scaleStyle(i) {
-      let style = this.showCalibDigit(i) ? this.bigScaleStyle : this.minScaleStyle;
+      let style = this.showCalibDigit(i) ? {
+        width: this.bigScaleWidth + this.unit,
+        height: this.bigScaleHeigth + this.unit,
+        marginTop: this.scaleHeigth / 2 - this.bigScaleHeigth / 2 + this.unit
+      } : {
+        width: this.minScaleWidth + this.unit,
+        height: this.minScaleHeigth + this.unit,
+        marginTop: this.scaleHeigth / 2 - this.minScaleHeigth / 2 + this.unit
+      };
       return style;
     },
     clockScaleTextStyle(i) {
+      let fontSize = this.clockSize / 15;
       return {
         transform: `rotate(${-this.calibDeg(i)}deg)`,
-        fontSize: this.clockSize / 15 + this.unit
+        fontSize: fontSize  + this.unit,
+        lineHeight: this.scaleHeigth + this.unit,
+        marginRight: fontSize / 5 + this.unit
       }
+    },
+    minuteLineStyle(i) {
+      return {
+        transform: `translate(0%, -50%) rotate(${this.calibDeg(i)}deg)`,
+        height: this.scaleHeigth + this.unit
+      };
     }
   },
   computed: {
@@ -99,7 +115,7 @@ export default {
       return this.size - this.clockBorderSize;
     },
     knobWidth() {
-      return this.clockSize * 0.025;
+      return this.clockSize * 0.06;
     },
     secondWidth() {
       return this.clockSize * 0.005;
@@ -133,6 +149,9 @@ export default {
     bigScaleHeigth() {
       return (this.clockSize / 2) * 0.025
     },
+    scaleHeigth() {
+      return this.clockSize * 0.1;
+    },
 
     knobStyle() {
       return {
@@ -160,18 +179,6 @@ export default {
         width: this.hourWidth + this.unit,
         height: this.hourHeight + this.unit,
         borderRadius: this.hourWidth + this.unit
-      }
-    },
-    minScaleStyle() {
-      return {
-        width: this.minScaleWidth + this.unit,
-        height: this.minScaleHeigth + this.unit,
-      }
-    },
-    bigScaleStyle() {
-      return {
-        width: this.bigScaleWidth + this.unit,
-        height: this.bigScaleHeigth + this.unit,
       }
     },
     clockStyle() {
@@ -270,53 +277,41 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* transform: translate(0%, -50%) rotate(30); */
   transform-origin: 0 50% 0;
   /* background-color: rgb(186, 189, 39); */
   width: 50%;
-  height: 10%;
+  /* height: 10%; */
   /* z-index: -1; */
 
 }
 
-.minute-line-box {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-
-  -webkit-box-pack: right;
-  -ms-flex-pack: right;
-  justify-content: right;
-
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  /* background-color: rgb(186, 189, 39); */
+.minute-line-outer-box {
+  width: 100%;
   height: 100%;
-  padding-right: 2%;
+  position: absolute;
+  right: 2%;
+  /* background-color: rgb(108, 109, 30); */
+}
 
+.minute-line-box {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  /* background-color: rgb(186, 189, 39); */
 }
 
 .minute-line-box .clock-scale-text {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-
-  box-direction: column;
-  flex-direction: column;
-
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  margin-right: 3%;
+  display: block;
+  float: right
 }
 
 .minute-line-box .clock-scale {
+  display: block;
+  float: right;
   height: 20%;
   width: 50px;
-  background-color: #000
+  background-color: #000;
+  margin-top: 50%;
 }
 
 @keyframes rotateArms {
