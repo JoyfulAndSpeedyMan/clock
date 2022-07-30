@@ -1,7 +1,7 @@
 <template>
   <div :style="wapper">
     <div class="clock" :style="clockStyle">
-      <div class="knob center"></div>
+      <div class="knob center" :style="knobStyle"></div>
       <div class="box seconds" :style="secondRotateStyle">
         <div class="arm second" :style="secondStyle"></div>
       </div>
@@ -98,7 +98,9 @@ export default {
     clockSize() {
       return this.size - this.clockBorderSize;
     },
-
+    knobWidth() {
+      return this.clockSize * 0.025;
+    },
     secondWidth() {
       return this.clockSize * 0.005;
     },
@@ -132,6 +134,13 @@ export default {
       return (this.clockSize / 2) * 0.025
     },
 
+    knobStyle() {
+      return {
+        width: this.knobWidth + this.unit,
+        height: this.knobWidth + this.unit,
+        borderRadius: this.knobWidth + this.unit
+      }
+    },
     secondStyle() {
       return {
         width: this.secondWidth + this.unit,
@@ -205,10 +214,7 @@ export default {
 }
 
 .knob {
-  width: 13.33333px;
-  height: 13.33333px;
   background: #111;
-  border-radius: 13.33333px;
   z-index: 4;
 }
 

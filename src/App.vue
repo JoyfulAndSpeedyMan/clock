@@ -4,7 +4,7 @@
   </div>
   <router-view>
     <div id="wa">
-      <h1 id = "b">我的表</h1>
+      <h1 id = "b">世界上最好的表</h1>
       <AnalogClock :size="80" unit="vmin"></AnalogClock>
     </div>
   </router-view>
